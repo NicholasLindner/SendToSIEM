@@ -10,8 +10,12 @@ class SEIMSender:
     def build_headers(self):
         raise NotImplementedError("Must be implemented in a subclass.")
 
-    def send_data(self, payload):
+    def build_payload(self, data):
+        raise NotImplementedError("Must be implemented in a subclass.")
+
+    def send_data(self, data):
         headers = self.build_headers()
+        payload = self.build_payload(data)
         response = requests.post(self.url, headers=headers, data=json.dumps(payload), verify=False)
         if response.status_code == 200:
             print("Success")
@@ -43,8 +47,7 @@ def main():
             token = input("Authorization Token: ")
 
             sender = Splunk(url, token)
-            payload = sender.build_payload(json.loads(data))
-            sender.send_data(payload)
+            sender.send_data(data)
         else:
             print("Only Splunk is supported currently.")
 
