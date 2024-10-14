@@ -31,7 +31,7 @@ python3 send_data_to_seim_system.py
 
     Example for Splunk:
 ```bash
-https://prd-p-abcde.splunkcloud.com:8088/services/collector/event
+    https://prd-p-abcde.splunkcloud.com:8088/services/collector/event
 ```
 3. Enter SEIM Token
 
