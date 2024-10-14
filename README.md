@@ -1,4 +1,5 @@
 # Send Data to SEIM System
+This is a python program that tackles sending JSON data to a **SEIM** system, with Splunk being the SIEM of choice. 
 
 ## Usage Instructions
 ### Step 1: Clone the Repository
@@ -32,7 +33,7 @@ python3 send_data_to_seim_system.py
 ```bash
 https://prd-p-abcde.splunkcloud.com:8088/services/collector/event
 ```
-3. Enter HEC Token
+3. Enter SEIM Token
 
 ### Output
 Either "Success" or Failure" will be displayed depending on the result of the request.
