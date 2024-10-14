@@ -28,7 +28,7 @@ python3 send_data_to_seim_system.py
 2. Enter your SEIM URL
 
 
-  Example for Splunk:
+     Example for Splunk:
 ```bash
 https://prd-p-abcde.splunkcloud.com:8088/services/collector/event
 ```
