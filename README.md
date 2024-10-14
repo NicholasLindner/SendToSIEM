@@ -1,6 +1,6 @@
 # Send Data to SEIM System
 
-## Usage
+## Usage Instructions
 ### Step 1: Clone the Repository
 In your terminal or command prompt, run the following command:
 ```bash
@@ -26,6 +26,8 @@ python3 send_data_to_seim_system.py
 ### Step 4: Provide Your Input
 1. Enter your JSON Data
 2. Enter your SEIM URL
+
+
 Example for Splunk:
 ```bash
 https://prd-p-abcde.splunkcloud.com:8088/services/collector/event
