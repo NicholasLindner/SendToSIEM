@@ -37,12 +37,3 @@ python3 send_data_to_seim_system.py
 
 ### Output
 Either "Success" or "Failure" will be displayed depending on the result of the request.
-=======
-
-## Usage
-Step 1: Clone the Repository
-In your terminal or command prompt, run the following command:
-```bash
-git clone https://github.com/NicholasLindner/SendToSEIM.git
-```
->>>>>>> b8dd01c (Update README.md)
