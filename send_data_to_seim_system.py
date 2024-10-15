@@ -1,5 +1,8 @@
 import requests
 import json
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
 class SEIMSender:
@@ -16,11 +19,15 @@ class SEIMSender:
     def send_data(self, data):
         headers = self.build_headers()
         payload = self.build_payload(data)
-        response = requests.post(self.url, headers=headers, data=json.dumps(payload), verify=False)
-        if response.status_code == 200:
-            print("Success")
-        else:
-            print(f"Failure status: {response.status_code}")
+        try:
+            response = requests.post(self.url, headers=headers, data=json.dumps(payload), verify=False)
+            if response.status_code == 200:
+                print("Success")
+            else:
+                print(f"Failure status: {response.status_code}")
+                logging.error(f"Failure status: {response.status_code} - {response.text}")
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Network error: {e}")
 
 
 class Splunk(SEIMSender):
@@ -53,8 +60,10 @@ def main():
 
     except json.JSONDecodeError:
         print("Please provide valid JSON data next time.")
+    except KeyboardInterrupt:
+        print("Interuption occurred.")
     except Exception as error:
-        print(f"Error: {error}")
+        print(f"E4rror: {error}")
 
 
 if __name__ == "__main__":
