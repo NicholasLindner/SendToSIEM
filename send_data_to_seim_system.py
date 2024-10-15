@@ -58,28 +58,31 @@ class Splunk(SEIMSender):
         }
 
 
+def make_sender(user_choice, url, token):
+    """Creates sender object based on the user's SEIM choice."""
+    if user_choice == "Splunk":
+        return Splunk(url, token)
+    else:
+        raise ValueError(f"Currently, only Splunk is supported.")
+
+
 def main():
     """Main function, which prompts user for input and send data to their selected SIEM."""
     try:
         seim_choice = input('Enter "Splunk" if you are using Splunk, otherwise please enter "Other": ')
-        if seim_choice == "Splunk":
 
-            original_data = input("JSON Data: ")
-            try:
-                valid_data = json.loads(original_data)
-            except json.JSONDecodeError as json_error:
-                print(f"Invalid JSON data: {json_error}")
-                return
-            url = input("Destination URL: ")
-            token = input("Authorization Token: ")
+        url = input("Destination URL: ")
+        token = input("Authorization Token: ")
+        sender = make_sender(seim_choice, url, token)
 
-            sender = Splunk(url, token)
-            sender.send_data(valid_data)
-        else:
-            print("Only Splunk is supported currently.")
+        original_data = input("JSON Data: ")
+        valid_data = json.loads(original_data)
+        sender.send_data(valid_data)
 
-    except json.JSONDecodeError:
-        print("Please provide valid JSON data next time.")
+    except json.JSONDecodeError as json_error:
+        print(f"Invalid JSON data: {json_error}")
+    except ValueError as value_error:
+        print(f"Error: {value_error}")
     except KeyboardInterrupt:
         print("Interuption occurred.")
     except Exception as error:
