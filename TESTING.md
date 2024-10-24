@@ -58,5 +58,5 @@ These tests ensure that the Splunk class correctly builds the headers and the pa
 
 ### Run Tests Using:
 ```bash
-python -m unittest test_synqly_client.py
+python -m unittest siem_tests.py
 ```
