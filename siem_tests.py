@@ -1,5 +1,5 @@
 import unittest
-from send_data_to_seim_system import Splunk
+from send_data_to_siem_system import Splunk
 
 
 class TestSplunkDataSender(unittest.TestCase):

@@ -4,7 +4,7 @@ Ensure JSON Data is Successfully Sent
 
 ### 1. Run Program:
 ```bash
-python send_data_to_seim_system.py
+python send_data_to_siem_system.py
 ```
 ### 2. Provide Valid Input
 * Choose "Splunk" or "Other" (Only Splunk is supported currently)

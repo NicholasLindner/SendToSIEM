@@ -5,12 +5,12 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 
-class SEIMSender:
+class SIEMSender:
     """
-    Base class to facilitate sending data to different SEIM systems.
+    Base class to facilitate sending data to different SIEM systems.
 
     This class defines general behavior expected from subclasses implementing
-    a specific SEIM system.
+    a specific SIEM system.
     """
 
     def __init__(self, url, token):
@@ -27,7 +27,7 @@ class SEIMSender:
         raise NotImplementedError("Must be implemented in a subclass.")
 
     def send_data(self, data):
-        """Sends Data to the SEIM system using a HTTP POST request."""
+        """Sends Data to the SIEM system using a HTTP POST request."""
         headers = self.build_headers()
         payload = self.build_payload(data)
         try:
@@ -41,8 +41,8 @@ class SEIMSender:
             logging.error(f"Network error: {e}")
 
 
-class Splunk(SEIMSender):
-    """Implementation of SEIMSender for Splunk. Sends data specifically to the Splunk HEC"""
+class Splunk(SIEMSender):
+    """Implementation of SIEMSender for Splunk. Sends data specifically to the Splunk HEC"""
 
     def build_headers(self):
         """Builds the HTTP headers needed for sending data to Splunk."""
@@ -59,7 +59,7 @@ class Splunk(SEIMSender):
 
 
 def make_sender(user_choice, url, token):
-    """Creates sender object based on the user's SEIM choice."""
+    """Creates sender object based on the user's SIEM choice."""
     if user_choice == "Splunk":
         return Splunk(url, token)
     else:
@@ -69,11 +69,11 @@ def make_sender(user_choice, url, token):
 def main():
     """Main function, which prompts user for input and send data to their selected SIEM."""
     try:
-        seim_choice = input('Enter "Splunk" if you are using Splunk, otherwise please enter "Other": ')
+        siem_choice = input('Enter "Splunk" if you are using Splunk, otherwise please enter "Other": ')
 
         url = input("Destination URL: ")
         token = input("Authorization Token: ")
-        sender = make_sender(seim_choice, url, token)
+        sender = make_sender(siem_choice, url, token)
 
         original_data = input("JSON Data: ")
         valid_data = json.loads(original_data)
